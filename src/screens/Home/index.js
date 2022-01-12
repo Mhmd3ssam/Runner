@@ -7,20 +7,36 @@ import { Avatar } from 'react-native-elements';
 
 const Home = () => {
     const[distance,setDistance] = useState("0.1");
+    const [error,setError] = useState(null);
+
+    const inputValdation = (input)=>{
+        let rgx = /^[0-9]*\.?[0-9]?$/;
+        return input.match(rgx);
+    }
+    const inputHandelChange = (value)=>{
+        if(!inputValdation(value)){
+            setDistance(distance);
+            setError('UnVaild Number');
+        }else{
+            setError("");
+            setDistance(value);
+        }
+        
+    }
     return (
         <View style={Styles.container}>
             {/* Distance section */}
             <Pressable style={Styles.distanceContainer}
                 onPress={() => { console.log('My distance') }}
             >
-                <TextInput style={Styles.distanceContent} 
+                <TextInput style={{...Styles.distanceContent, color: error ?"red":"black"}} 
                 value={distance} 
                 keyboardType='decimal-pad'
-                onChangeText={(value)=>{setDistance(value)}}
+                onChangeText={(value)=>{inputHandelChange(value)}}
                 />
                 <View style={Styles.underLineDistanceContent}></View>
-                <Text style={Styles.measurementUnit}>
-                    {'Kilometer'}
+                <Text style={{...Styles.measurementUnit ,color: error ?"red":"black" }}>
+                    {error ?error:'Kilometer'}
                 </Text>
             </Pressable>
             {/* Map section */}

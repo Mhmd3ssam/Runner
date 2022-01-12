@@ -18,7 +18,7 @@ export const Styles = StyleSheet.create({
     distanceContent:{
       fontSize: 42,
       fontWeight: "bold",
-      color: 'red',
+      color: '#fe9836',
       alignSelf:"center"
     },
     underLineDistanceContent:{
@@ -27,6 +27,7 @@ export const Styles = StyleSheet.create({
     measurementUnit:{
       alignSelf: "center",
       fontSize: 15,
+      color:"black"
     },
     stratSectionContainer:{
       justifyContent: "space-between",
