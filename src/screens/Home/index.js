@@ -8,29 +8,19 @@ import { Avatar } from 'react-native-elements';
 const Home = () => {
     return (
         <View style={Styles.container}>
-            <Pressable style={{
-                marginTop: 50,
-                marginBottom: 50
-            }}
+            {/* Distance section */}
+            <Pressable style={Styles.distanceContainer}
                 onPress={() => { console.log('My distance') }}
             >
-                <Text style={{
-                    fontSize: 42,
-                    fontWeight: "bold",
-                    color: 'red'
-                }}>
+                <Text style={Styles.distanceContent}>
                     {'3.02'}
                 </Text>
-                <View style={{
-                    borderBottomWidth: 3,
-                }}></View>
-                <Text style={{
-                    alignSelf: "center",
-                    fontSize: 15,
-                }}>
+                <View style={Styles.underLineDistanceContent}></View>
+                <Text style={Styles.measurementUnit}>
                     {'Kilometer'}
                 </Text>
             </Pressable>
+            {/* Map section */}
             <MapView
                 style={Styles.map}
                 region={{
@@ -41,46 +31,26 @@ const Home = () => {
                 }}
             >
             </MapView>
-            {/*Start Button  */}
-            <View style={{
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: 10,
-                marginTop: 10,
-            }}>
+            {/*Start Button section */}
+            <View style={Styles.stratSectionContainer}>
                 <Avatar
                     size={115}
                     rounded
                     title="START"
-                    titleStyle={{
-                        fontSize: 22,
-                        color: "#fff",
-                        fontWeight: "bold"
-
-                    }}
-                    containerStyle={{
-                        backgroundColor: '#fe9836',
-                        fontSize: 1
-                    }}
+                    titleStyle={Styles.stratAvatarContent}
+                    containerStyle={Styles.avaterContainer}
                     onPress={() => { console.log('start') }}
                 />
                 {/* Toggle butoon to conter the trip by distance or time  */}
                 <Pressable
                     onPress={() => { console.log('change to time') }}
-                    style={{
-                        marginBottom: 10,
-                        marginTop: 10,
-                    }}
+                    style={Styles.toggleContainer}
                 >
-                    <Text style={{
-                        alignSelf: "center",
-                        fontSize: 15,
-                    }}>
+                    <Text style={Styles.toggleContent}>
                         {'Distance'}
                     </Text>
                 </Pressable>
             </View>
-
         </View>
     )
 };
