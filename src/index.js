@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, } from 'react-native';
-
+import { COLORS } from './common/color';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
@@ -18,9 +18,9 @@ export const App = () => {
       <Tab.Navigator screenOptions={{
         tabBarLabelStyle: { 
           fontWeight:"bold",
-          color:"#040404"
+          color:COLORS.oxfordBlue
         },
-        tabBarStyle: { backgroundColor: 'powderblue' },
+        tabBarStyle: { backgroundColor: COLORS.powderblue },
       }}>
         <Tab.Screen name="Home" component={HomeScreen} options={{
           tabBarLabel:"Run"
