@@ -18,7 +18,8 @@ export const Styles = StyleSheet.create({
     distanceContent:{
       fontSize: 42,
       fontWeight: "bold",
-      color: 'red'
+      color: 'red',
+      alignSelf:"center"
     },
     underLineDistanceContent:{
       borderBottomWidth: 3

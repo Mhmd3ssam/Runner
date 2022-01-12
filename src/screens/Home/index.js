@@ -1,20 +1,23 @@
-import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import React,{useState} from 'react';
+import { View, Text, Pressable, TextInput} from 'react-native';
 import MapView from 'react-native-maps';
 import { Styles } from './styles';
 
 import { Avatar } from 'react-native-elements';
 
 const Home = () => {
+    const[distance,setDistance] = useState("0.1");
     return (
         <View style={Styles.container}>
             {/* Distance section */}
             <Pressable style={Styles.distanceContainer}
                 onPress={() => { console.log('My distance') }}
             >
-                <Text style={Styles.distanceContent}>
-                    {'3.02'}
-                </Text>
+                <TextInput style={Styles.distanceContent} 
+                value={distance} 
+                keyboardType='decimal-pad'
+                onChangeText={(value)=>{setDistance(value)}}
+                />
                 <View style={Styles.underLineDistanceContent}></View>
                 <Text style={Styles.measurementUnit}>
                     {'Kilometer'}
