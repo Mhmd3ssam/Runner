@@ -14,6 +14,10 @@ target 'RunTest' do
 
   pod 'react-native-viewpager', :path => '../node_modules/@react-native-community/viewpager'
 
+  pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'RunTestTests' do
     inherit! :complete
     # Pods for testing

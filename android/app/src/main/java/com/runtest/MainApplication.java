@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 import com.reactnativecommunity.viewpager.RNCViewPagerPackage;
 import com.reactnativecommunity.viewpager.RNCViewPagerPackage;
 import com.facebook.react.ReactInstanceManager;

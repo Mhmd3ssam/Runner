@@ -3,19 +3,21 @@ import { View, Text, Pressable } from 'react-native';
 import MapView from 'react-native-maps';
 import { Styles } from './styles';
 
+import { Avatar } from 'react-native-elements';
+
 const Home = () => {
     return (
         <View style={Styles.container}>
             <Pressable style={{
-                marginTop:50,
-                marginBottom:50
+                marginTop: 50,
+                marginBottom: 50
             }}
-            onPress={()=>{console.log('Hi')}}
+                onPress={() => { console.log('Hi') }}
             >
                 <Text style={{
                     fontSize: 42,
                     fontWeight: "bold",
-                    color:'red'
+                    color: 'red'
                 }}>
                     {'3.02'}
                 </Text>
@@ -39,6 +41,24 @@ const Home = () => {
                 }}
             >
             </MapView>
+            <Avatar
+                size={115}
+                rounded
+                title="START"
+                titleStyle={{
+                    fontSize:22,
+                    color:"#fff",
+                    fontWeight:"bold"
+
+                }}
+                containerStyle={{
+                    backgroundColor: '#fe9836',
+                    marginBottom: 50,
+                    marginTop: 50,
+                    fontSize:1
+                }}
+                onPress={()=>{console.log('clicked')}}
+            />
         </View>
     )
 };
