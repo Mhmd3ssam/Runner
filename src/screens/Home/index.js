@@ -17,7 +17,6 @@ const Home = () => {
                 }}
             >
             </MapView>
-            <Text>{'Home Screen'}</Text>
         </View>
     )
 };

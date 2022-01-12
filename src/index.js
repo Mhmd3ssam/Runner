@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { Text, View, } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -16,10 +15,18 @@ export const App = () => {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="History" component={HistoryScreen} />
-        </Tab.Navigator>
+      <Tab.Navigator screenOptions={{
+        tabBarLabelStyle: { 
+          fontWeight:"bold",
+          color:"#040404"
+        },
+        tabBarStyle: { backgroundColor: 'powderblue' },
+      }}>
+        <Tab.Screen name="Home" component={HomeScreen} options={{
+          tabBarLabel:"Run"
+        }}/>
+        <Tab.Screen name="History" component={HistoryScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
 
   );
