@@ -25,7 +25,7 @@ export const App = () => {
         <Tab.Screen name="Home" component={HomeScreen} options={{
           tabBarLabel:"Run"
         }}/>
-        <Tab.Screen name="History" component={HistoryScreen} />
+        <Tab.Screen name="Trips" component={HistoryScreen} />
       </Tab.Navigator>
     </NavigationContainer>
 
