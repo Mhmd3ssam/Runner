@@ -11,8 +11,7 @@ const History = () => {
             <FlatList
                 data={dummy_data}
                 renderItem={renderItem}
-                keyExtractor={item => item.Id}
-                
+                keyExtractor={item => item.Id} 
             />
         </SafeAreaView>
     )

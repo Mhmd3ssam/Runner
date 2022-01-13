@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, Pressable, TextInput } from 'react-native';
 import MapView, { Circle } from 'react-native-maps';
 import { Styles } from './styles';
-
 import { Avatar } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
+    const navigation = useNavigation(); 
     const [distance, setDistance] = useState('0.0');
     const [time, setTime] = useState({
         hours: '00',
@@ -95,7 +96,7 @@ const Home = () => {
                         title="START"
                         titleStyle={Styles.stratAvatarContent}
                         containerStyle={Styles.avaterContainer}
-                        onPress={() => { console.log('start') }}
+                        onPress={() => { navigation.navigate("Start") }}
                     />
                     {/* Toggle butoon to conter the trip by distance or time  */}
                     <Pressable
@@ -111,7 +112,7 @@ const Home = () => {
                     </Pressable>
                    
                 </View>
-               
+              
             </View>
           
         </>

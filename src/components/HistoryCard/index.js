@@ -4,7 +4,7 @@ import StatusBarLayout from './StatusBarLayout';
 import StatusContent from './StatusContent';
 import { useNavigation } from '@react-navigation/native';
 
-const Card = ({data, }) => {
+const Card = ({data }) => {
     const navigation = useNavigation(); 
     return (
     <Pressable style={{paddingHorizontal:12}} key={data.Id} onPress={()=>{navigation.navigate("TripDetails",{data:data})}}>
@@ -46,8 +46,8 @@ const Card = ({data, }) => {
                 </View>
             </View>
                 <StatusBarLayout>
-                    <StatusContent title="Kilometer" measure={data.Kilometers}/>
-                    <StatusContent title="Time" measure={data.Time}/>
+                    <StatusContent title="Kilometer" measure={data.Kilometers} />
+                    <StatusContent title="Time" measure={data.Time} />
                     <StatusContent title="Steps" measure={data.Steps}/>
                 </StatusBarLayout>           
        </View>

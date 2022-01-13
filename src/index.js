@@ -8,7 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/Home';
 import HistoryScreen from './screens/History';
 import DetailsScreen from './screens/Details';
-
+import StartScreen from './screens/Start';
 
 export const App = () => {
   const Tab = createMaterialTopTabNavigator();
@@ -19,6 +19,7 @@ export const App = () => {
       <Stack.Navigator>   
           <Stack.Screen name="Home" component={MyTaps}  options={{headerShown: false}}/>
           <Stack.Screen name="TripDetails" component={DetailsScreen}  />
+          <Stack.Screen name="Start" component={StartScreen}  />
       </Stack.Navigator>
     )
   }
