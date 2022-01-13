@@ -50,7 +50,21 @@ const Home = () => {
     }
 
     return (
-        <View style={Styles.container}>
+        <>
+         {/* Map section */}
+            <View style={Styles.container}>
+            <MapView
+                style={Styles.map}
+                region={{
+                    latitude: 38.78825,
+                    longitude: -122.4324,
+                    latitudeDelta: 0.015,
+                    longitudeDelta: 0.0121,
+                }}
+            >
+            </MapView>
+            </View>
+        <View style={Styles.screenContentConatiner}>
             {/* Distance section */}
             <Pressable style={Styles.distanceContainer}
                 onPress={() => { console.log('My distance') }}
@@ -65,17 +79,6 @@ const Home = () => {
                     {error ? error : toggle ? "Kilometers" : "Hours : Minutes"}
                 </Text>
             </Pressable>
-            {/* Map section */}
-            <MapView
-                style={Styles.map}
-                region={{
-                    latitude: 38.78825,
-                    longitude: -122.4324,
-                    latitudeDelta: 0.015,
-                    longitudeDelta: 0.0121,
-                }}
-            >
-            </MapView>
             {/*Start Button section */}
             <View style={Styles.stratSectionContainer}>
                 <Avatar
@@ -100,7 +103,13 @@ const Home = () => {
                 </Pressable>
             </View>
         </View>
+    
+        </>
     )
+        
 };
 
 export default Home;
+
+
+//  

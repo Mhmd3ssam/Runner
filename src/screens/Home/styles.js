@@ -7,6 +7,13 @@ export const Styles = StyleSheet.create({
       alignItems: 'center',
       
     },
+    screenContentConatiner:{
+      position:"absolute",
+      ...StyleSheet.absoluteFill,
+      alignItems: 'center',
+      justifyContent: "space-between",
+      
+    },
     map: {
       width: 400,
       flex:1
