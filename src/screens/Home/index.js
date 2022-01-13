@@ -52,20 +52,20 @@ const Home = () => {
     return (
         <>
          {/* Map section */}
-            <View style={Styles.container}>
+            <View style={Styles.container} pointerEvents='none'>
             <MapView
                 style={Styles.map}
                 region={{
-                    latitude: 38.78825,
-                    longitude: -122.4324,
-                    latitudeDelta: 0.015,
-                    longitudeDelta: 0.0121,
+                    latitude: -100.88,
+                    longitude: -150.434,
+                    latitudeDelta: -5.5,
+                    longitudeDelta: -.2,
                 }}
             >
             </MapView>
             </View>
-        <View style={Styles.screenContentConatiner}>
-            {/* Distance section */}
+            <View style={Styles.screenContentConatiner}>
+                  {/* Distance section */}
             <Pressable style={Styles.distanceContainer}
                 onPress={() => { console.log('My distance') }}
             >
@@ -101,7 +101,7 @@ const Home = () => {
                         {toggle ? 'Distance' : 'Time'}
                     </Text>
                 </Pressable>
-            </View>
+            </View>          
         </View>
     
         </>
@@ -112,4 +112,3 @@ const Home = () => {
 export default Home;
 
 
-//  

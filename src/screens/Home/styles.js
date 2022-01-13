@@ -12,11 +12,13 @@ export const Styles = StyleSheet.create({
       ...StyleSheet.absoluteFill,
       alignItems: 'center',
       justifyContent: "space-between",
-      
+       
     },
     map: {
       width: 400,
-      flex:1
+      flex:1,
+      backgroundColor: '#000',
+      opacity: 0.3, 
     },
     distanceContainer:{
       marginTop: 50,
