@@ -59,12 +59,15 @@ export const Styles = StyleSheet.create({
       padding:10,
       borderRadius:30,
       borderWidth:1,
-      borderColor:"#ccc",
+      borderColor:"#fe9836",
+      backgroundColor:"white"
     },
     toggleContent:{
       alignSelf: "center",
       fontSize: 15,
-      fontWeight:"bold"
+      fontWeight:"bold",
+      color: "#fe9836",
+     
     }
     
 });

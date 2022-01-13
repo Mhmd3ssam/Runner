@@ -1,0 +1,48 @@
+export let dummy_data = [
+    {
+    "ID":"1",
+    "Day":"Monday",
+    "Title":"Monday Moring Run",
+    "MapImage":"https://images.unsplash.com/photo-1584972191378-d70853fc47fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    "Kilometers":"3.2",
+    "Time":"0.20",
+    "Steps":"15520",
+},
+    {
+    "ID":"2",
+    "Day":"Monday",
+    "Title":"Monday Moring Run",
+    "MapImage":"https://images.unsplash.com/photo-1584972191378-d70853fc47fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    "Kilometers":"3.2",
+    "Time":"0.20",
+    "Steps":"15520",
+},
+    {
+    "ID":"3",
+    "Day":"Monday",
+    "Title":"Monday Moring Run",
+    "MapImage":"https://images.unsplash.com/photo-1584972191378-d70853fc47fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    "Kilometers":"3.2",
+    "Time":"0.20",
+    "Steps":"15520",
+},
+    {
+    "ID":"4",
+    "Day":"Monday",
+    "Title":"Monday Moring Run",
+    "MapImage":"https://images.unsplash.com/photo-1584972191378-d70853fc47fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    "Kilometers":"3.2",
+    "Time":"0.20",
+    "Steps":"15520",
+},
+    {
+    "ID":"5",
+    "Day":"Monday",
+    "Title":"Monday Moring Run",
+    "MapImage":"https://images.unsplash.com/photo-1584972191378-d70853fc47fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    "Kilometers":"3.2",
+    "Time":"0.20",
+    "Steps":"15520",
+},
+
+]
