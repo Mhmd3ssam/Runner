@@ -1,10 +1,13 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image , Pressable} from 'react-native';
 import StatusBarLayout from './StatusBarLayout';
 import StatusContent from './StatusContent';
-const Card = ({data}) => {
+import { useNavigation } from '@react-navigation/native';
+
+const Card = ({data, }) => {
+    const navigation = useNavigation(); 
     return (
-    <View style={{paddingHorizontal:12}} key={data.Id}>
+    <Pressable style={{paddingHorizontal:12}} key={data.Id} onPress={()=>{navigation.navigate("TripDetails",{data:data})}}>
         <View style={{
             borderRadius:12,
             backgroundColor:'#fff',
@@ -48,7 +51,7 @@ const Card = ({data}) => {
                     <StatusContent title="Steps" measure={data.Steps}/>
                 </StatusBarLayout>           
        </View>
-    </View>
+    </Pressable>
     )
 };
 
