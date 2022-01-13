@@ -7,12 +7,14 @@ import { Avatar } from 'react-native-elements';
 
 const Home = () => {
     const[distance,setDistance] = useState("0.1");
+    const[toggle,setToggle] = useState(true);
     const [error,setError] = useState(null);
 
     const inputValdation = (input)=>{
         let rgx = /^[0-9]*\.?[0-9]?$/;
         return input.match(rgx);
     }
+
     const inputHandelChange = (value)=>{
         if(!inputValdation(value)){
             setDistance(distance);
@@ -23,6 +25,7 @@ const Home = () => {
         }
         
     }
+
     return (
         <View style={Styles.container}>
             {/* Distance section */}
@@ -36,7 +39,7 @@ const Home = () => {
                 />
                 <View style={Styles.underLineDistanceContent}></View>
                 <Text style={{...Styles.measurementUnit ,color: error ?"red":"black" }}>
-                    {error ?error:'Kilometer'}
+                    {error ?error:toggle?"Kilometers":"Minutes"}
                 </Text>
             </Pressable>
             {/* Map section */}
@@ -62,11 +65,11 @@ const Home = () => {
                 />
                 {/* Toggle butoon to conter the trip by distance or time  */}
                 <Pressable
-                    onPress={() => { console.log('change to time') }}
-                    style={Styles.toggleContainer}
+                    onPress={() => {setToggle(!toggle) }}
+                    style={Styles.toggleContainer}   
                 >
                     <Text style={Styles.toggleContent}>
-                        {'Distance'}
+                        {toggle?'Distance':'Time'}
                     </Text>
                 </Pressable>
             </View>
