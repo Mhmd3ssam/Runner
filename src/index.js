@@ -1,6 +1,8 @@
 import React from 'react';
-import { Text, View, } from 'react-native';
+import { Pressable } from 'react-native';
 import { COLORS } from './common/color';
+import Fontisto from "react-native-vector-icons/Fontisto";
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -18,7 +20,15 @@ export const App = () => {
     return(
       <Stack.Navigator>   
           <Stack.Screen name="Home" component={MyTaps}  options={{headerShown: false}}/>
-          <Stack.Screen name="TripDetails" component={DetailsScreen}  />
+          <Stack.Screen name="TripDetails" component={DetailsScreen} options={{
+            headerRight:()=>{
+             return(
+            <Pressable onPress={()=>{console.log("share")}}>
+              <Fontisto name="share" size={20} style={{marginRight:15, color:"black"}}/>
+            </Pressable>
+             )
+            }
+          }} />
           <Stack.Screen name="Start" component={StartScreen}  />
       </Stack.Navigator>
     )
