@@ -19,7 +19,8 @@ export const Styles = StyleSheet.create({
     },
     titleContent: {
         fontSize: 20,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        
     },
     editeIcone: {
         color: "black",
@@ -46,6 +47,9 @@ export const Styles = StyleSheet.create({
         paddingHorizontal:20,
         paddingVertical:15,
     },
+    tripIcons:{
+        color:"#014b8e",
+    },
     progressContainer:{
         flex:1,
         justifyContent:"flex-start",
@@ -55,5 +59,31 @@ export const Styles = StyleSheet.create({
     progressImage:{
         height:150,
         width:130
-    }
+    },
+    progressBarContainer:{
+        borderRadius:3,
+        backgroundColor:"#fff",
+        borderWidth:1,
+        borderColor:"#fe9836",
+        width:"80%"
+    },
+    iconProgreess:{
+        position:"absolute",
+        bottom:0,
+        right:0,
+        top:135,
+        left:300,
+        color:"green"
+    },
+    progress:{
+        borderRadius:1,
+        backgroundColor:"#fe9836",
+        borderWidth:2,
+        borderColor:"green",
+        width:"20%"
+    },
+    progressText:{
+        marginTop:15
+    },
+
 })
