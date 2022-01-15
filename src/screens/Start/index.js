@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Pressable, Alert } from 'react-native';
+import { View, Text, Pressable, Alert, Vibration} from 'react-native';
 import { Avatar } from 'react-native-elements';
 
 import { Styles } from './styles'
@@ -21,7 +21,10 @@ const StartScreen = ({ route, navigation }) => {
     const[pausStps,setPausStps] = useState(steps)
     const [progress, setProgress] = useState('20%');
     const [resume, setResume] = useState(true);
+    const[tripTime, setTripTime] = useState();
+    const[tripDistance, setTripDistance] = useState();
 
+    const ONE_SECOND_IN_MS = 1000;
 
     const timeIcon = <Ionicons name="timer-outline" size={50} style={Styles.tripIcons} />
     const measureIcon = <FontAwesome5 name="running" size={50} style={Styles.tripIcons} />
@@ -90,7 +93,11 @@ const StartScreen = ({ route, navigation }) => {
                         {resume ? pauseIcon : resumIcon}
                     </View>
                 </Pressable>
-                <Pressable onLongPress={()=>{navigation.navigate("Trips")}}>
+                <Pressable onLongPress={()=>{
+                    Vibration.vibrate()
+                    navigation.navigate("Trips")
+                    
+                }}>
                     <Avatar
                         size={100}
                         rounded
