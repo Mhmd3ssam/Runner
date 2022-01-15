@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Alert } from 'react-native';
 import { Avatar } from 'react-native-elements';
 
 import { Styles } from './styles'
@@ -18,6 +18,7 @@ import Progress from "../../components/Progress";
 const StartScreen = ({ route, navigation }) => {
     const { distance, time } = route.params;
     const [steps, setSteps] = useState(0);
+    const[pausStps,setPausStps] = useState(steps)
     const [progress, setProgress] = useState('20%');
     const [resume, setResume] = useState(true);
 
@@ -29,6 +30,24 @@ const StartScreen = ({ route, navigation }) => {
     const pauseIcon = <Ionicons name="pause" size={50} style={{color:"#fe9836"}} />
     const resumIcon = <AntDesign name="caretright" size={50} style={{color:"#fe9836"}}/>
 
+    const handleTrip = ()=>{ 
+        setResume(!resume);
+        setPausStps(steps);
+        
+    }
+
+ 
+    useEffect(()=>{
+        navigation.addListener('beforeRemove',(event)=>{
+            event.preventDefault();
+            Alert.alert('Leaving!!','Are you sure you want to leave this trip ?!',[
+                {text:"No",style:"cancel",onPress:()=>{}},
+                {text:"yes",style:"destructive",onPress:()=>{navigation.dispatch(event.data.action)}},
+
+            ]
+            )
+        })
+    },[navigation])
     useEffect(() => {
         const config = {
             default_threshold: 15.0,
@@ -39,7 +58,7 @@ const StartScreen = ({ route, navigation }) => {
         }
         startCounter(config);
         return () => { stopCounter() }
-    }, []);
+    }, [resume]);
 
     return (
         <View style={{
@@ -52,16 +71,16 @@ const StartScreen = ({ route, navigation }) => {
                 <StatusBarLayout>
                     <StatusContent icon={measureIcon} measure={distance} {...Styles.tripContent} />
                     <StatusContent icon={timeIcon} measure={`${time.hours}:${time.minutes}`} {...Styles.tripContent} />
-                    <StatusContent icon={stepsIcon} measure={steps} {...Styles.tripContent} />
+                    <StatusContent icon={stepsIcon} measure={resume ? steps:pausStps  } {...Styles.tripContent} />
                 </StatusBarLayout>
             </View>
             <View style={Styles.distanceContainer}>
                 <Text style={Styles.distanceContent}>{'5.00'}</Text>
-                <Text style={Styles.distanceText}>{'Mels'}</Text>
+                <Text style={Styles.distanceText}>{'Miles'}</Text>
             </View>
             <Progress {...{ marginTop: 60 }} progress={progress} />
             <View style={Styles.avatarContainer}>
-                <Pressable onPress={() => { setResume(!resume)}}>
+                <Pressable onPress={handleTrip}>
                     <Avatar
                         size={100}
                         rounded
