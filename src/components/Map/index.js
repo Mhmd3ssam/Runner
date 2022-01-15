@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { Styles } from './styles.js';
 
 const Map = () => {
+  
     return (
         <View style={Styles.mapContainer}>
             <MapView

@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import { View, Text, Pressable, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Pressable, TextInput, PermissionsAndroid,Platform, } from 'react-native';
 import MapView, { Circle } from 'react-native-maps';
+import Geolocation from 'react-native-geolocation-service';
 import { Styles } from './styles';
 import { Avatar } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import { uerPermision } from '../../service';
+
+
 
 const Home = () => {
     const navigation = useNavigation(); 
@@ -15,7 +19,9 @@ const Home = () => {
     })
     const [toggle, setToggle] = useState(true);
     const [error, setError] = useState(null);
-
+    const[psoition,setposition] = useState({});
+    
+    
     const inputValdation = (input, typeOFMeasure) => {
         let rgx;
         if (typeOFMeasure) {
@@ -50,6 +56,34 @@ const Home = () => {
 
     }
 
+    const userLocation =async  ()=>{
+        let hasPermission = await uerPermision();
+        if(!hasPermission)return;
+        Geolocation.getCurrentPosition((position)=>{
+            setposition(position) ;
+            console.log(position);
+        }, (error)=>{
+            console.log(error);
+            setposition(null);
+        },{
+            accuracy: {
+              android: 'high',
+            },
+            enableHighAccuracy: true,
+            timeout: 30000,
+            maximumAge: 10000,
+            distanceFilter: 0,
+            forceRequestLocation: true,
+            forceLocationManager: false,
+            showLocationDialog: true,
+          });
+    }
+    useEffect(()=>{
+        uerPermision();
+        userLocation();
+        console.log(psoition.latitude,'latitude')
+        
+    },[navigation])
     return (
         <>
             {/* Map section */}
@@ -57,16 +91,16 @@ const Home = () => {
                 <MapView
                     style={Styles.map}
                     region={{
-                        latitude: 37.75710,
-                        longitude: -122.4324,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
+                        latitude: psoition?.coords.latitude || 31.0326272,
+                        longitude: psoition?.coords.longitude ||30.7142433,
+                        latitudeDelta: psoition?.latitudeDelta ||0.0922,
+                        longitudeDelta: psoition?.longitudeDelta ||0.0421,
                     }}
                     minZoomLevel={18}
                 >
                     <Circle center={{
-                        latitude: 37.75710,
-                        longitude: -122.4324
+                        latitude: psoition?.coords.latitude || 31.0326272,
+                        longitude: psoition?.coords.longitude ||30.7142433
                     }}
                         radius={4}
                         fillColor='red'
@@ -120,3 +154,4 @@ const Home = () => {
 export default Home;
 
 
+//  {"coords": {"accuracy": 16.68400001525879, "altitude": 22.600000381469727, "altitudeAccuracy": 1.7365318536758423, "heading": 93.92518615722656, "latitude": 31.0326272, "longitude": 30.7142433, "speed": 0.26427894830703735}, "mocked": false, "provider": "fused", "timestamp": 1642279055274}
