@@ -29,7 +29,7 @@ export const App = () => {
              )
             }
           }} />
-          <Stack.Screen name="Start" component={StartScreen}  />
+          <Stack.Screen name="Start" component={StartScreen} options={{headerShown: false}} />
       </Stack.Navigator>
     )
   }

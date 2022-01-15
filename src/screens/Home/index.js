@@ -32,13 +32,13 @@ const Home = () => {
 
         if (!inputValdation(value, toggle)[0] && toggle) {
             setDistance('');
-            setError('Be ease 😎');
+            setError('Be easy 😎');
         } else if (!inputValdation(value, toggle)[0] || toggle) {
             setDistance(value);
             setError('')
         } else if (!inputValdation(value, toggle)[0] && !toggle) {
             setTime('');
-            setError('Be ease 😎');
+            setError('Be easy 😎');
         } else {
             let h = value.split(':')[0];
             let m = value.split(':')[1];
@@ -96,7 +96,7 @@ const Home = () => {
                         title="START"
                         titleStyle={Styles.stratAvatarContent}
                         containerStyle={Styles.avaterContainer}
-                        onPress={() => { navigation.navigate("Start") }}
+                        onPress={() => { navigation.navigate("Start",{distance:distance,time:time}) }}
                     />
                     {/* Toggle butoon to conter the trip by distance or time  */}
                     <Pressable
