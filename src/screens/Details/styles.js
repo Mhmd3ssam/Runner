@@ -86,5 +86,17 @@ export const Styles = StyleSheet.create({
     progressText:{
         marginTop:15
     },
-
+    mapContainer:{
+        ...StyleSheet.absoluteFill,
+        flex:1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        
+    },
+    map: {
+        width: 400,
+        flex:1,
+        backgroundColor: '#000',
+        opacity: 0.3, 
+    },
 })

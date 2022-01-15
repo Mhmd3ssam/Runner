@@ -11,6 +11,7 @@ import HomeScreen from './screens/Home';
 import HistoryScreen from './screens/History';
 import DetailsScreen from './screens/Details';
 import StartScreen from './screens/Start';
+import Map from './components/Map';
 
 export const App = () => {
   const Tab = createMaterialTopTabNavigator();
@@ -30,6 +31,7 @@ export const App = () => {
             }
           }} />
           <Stack.Screen name="Start" component={StartScreen} options={{headerShown: false}} />
+          <Stack.Screen name="Map" component={Map} options={{headerShown: false}} />
       </Stack.Navigator>
     )
   }
