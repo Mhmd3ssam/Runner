@@ -23,7 +23,39 @@ export const Styles = StyleSheet.create({
         color: "white",
         marginBottom: 10,
         fontSize: 35,
-    }
-
-
+    },
+    distanceContainer:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop:60
+    },
+    distanceContent:{
+        fontSize: 90,
+        color:"black",
+        fontWeight:"bold",
+        fontStyle:"italic"
+    },
+    distanceText:{
+        fontSize: 30,
+        color:"white"
+    },
+    avatarContainer:{
+        flexDirection:"row",
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom:40
+    },
+    avater:{
+        backgroundColor: 'white',
+        marginHorizontal:35,
+        borderColor:"black",
+        borderWidth:3,
+    },
+    pausIcon:{
+        position:"absolute",
+        bottom:0,
+        left:60,
+        top:25,
+    },
+    
 });

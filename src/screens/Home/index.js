@@ -109,12 +109,9 @@ const Home = () => {
                         <Text style={Styles.toggleContent}>
                             {toggle ? 'Distance' : 'Time'}
                         </Text>
-                    </Pressable>
-                   
-                </View>
-              
+                    </Pressable>             
+                </View>     
             </View>
-          
         </>
     )
 

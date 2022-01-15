@@ -22,9 +22,9 @@ const Details = ({ route, navigation }) => {
     const[imageLevelSrc,setImageLevelSrc] = useState(null)
     const titleInputRef = useRef();
 
-    const timeIcon = <Ionicons name="timer-outline" size={20} style={Styles.tripIcons}/>
-    const measureIcon = <FontAwesome5 name="running" size={20} style={Styles.tripIcons}/>
-    const stepsIcon = <Entypo name="baidu" size={20} style={Styles.tripIcons}/>
+    const timeIcon = <Ionicons name="timer-outline" size={25} style={Styles.tripIcons}/>
+    const measureIcon = <FontAwesome5 name="running" size={25} style={Styles.tripIcons}/>
+    const stepsIcon = <Entypo name="baidu" size={25} style={Styles.tripIcons}/>
 
     const calcLeve = (totalDistance)=>{
         for(let i=0; i< Levels.length ; i++){
@@ -81,9 +81,9 @@ const Details = ({ route, navigation }) => {
             </View>
             <View style={Styles.tripDetailsContainer}>
                 <StatusBarLayout>
-                    <StatusContent icon={measureIcon} measure={data.Kilometers} />
-                    <StatusContent icon={timeIcon} measure={data.Time} />
-                    <StatusContent icon={stepsIcon} measure={data.Steps} />
+                    <StatusContent icon={measureIcon} measure={data.Kilometers} {...{marginBottom: 10}} />
+                    <StatusContent icon={timeIcon} measure={data.Time} {...{marginBottom: 10}}/>
+                    <StatusContent icon={stepsIcon} measure={data.Steps} {...{marginBottom: 10}}/>
                 </StatusBarLayout>
             </View>
             <View style={Styles.progressContainer}>

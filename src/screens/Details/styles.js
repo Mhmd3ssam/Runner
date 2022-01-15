@@ -34,6 +34,7 @@ export const Styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 100,
         color: "black",
+        fontStyle:"italic"
     },
     distanceMeasureText:{
         fontSize: 30,

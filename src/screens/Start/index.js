@@ -1,23 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Pressable, SafeAreaView } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
+import { Avatar } from 'react-native-elements';
+
 import { Styles } from './styles'
 import { startCounter, stopCounter } from 'react-native-accurate-step-counter';
 
 import Entypo from "react-native-vector-icons/Entypo";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 import StatusBarLayout from "../../components/HistoryCard/StatusBarLayout";
 import StatusContent from "../../components/HistoryCard/StatusContent";
+import Progress from "../../components/Progress";
+
 
 const StartScreen = ({ route, navigation }) => {
-    const { distance,time } = route.params;
+    const { distance, time } = route.params;
     const [steps, setSteps] = useState(0);
+    const [progress, setProgress] = useState('20%');
+    const [resume, setResume] = useState(true);
 
 
-    const timeIcon = <Ionicons name="timer-outline" size={50} style={Styles.tripIcons}/>
-    const measureIcon = <FontAwesome5 name="running" size={50} style={Styles.tripIcons}/>
-    const stepsIcon = <Entypo name="baidu" size={50} style={Styles.tripIcons}/>
+    const timeIcon = <Ionicons name="timer-outline" size={50} style={Styles.tripIcons} />
+    const measureIcon = <FontAwesome5 name="running" size={50} style={Styles.tripIcons} />
+    const stepsIcon = <Entypo name="baidu" size={50} style={Styles.tripIcons} />
+    const finshIcon = <Ionicons name="stop-circle-outline" size={50} style={{color:"#fe9836"}} />
+    const pauseIcon = <Ionicons name="pause" size={50} style={{color:"#fe9836"}} />
+    const resumIcon = <AntDesign name="caretright" size={50} style={{color:"#fe9836"}}/>
 
     useEffect(() => {
         const config = {
@@ -40,11 +50,38 @@ const StartScreen = ({ route, navigation }) => {
         }}>
             <View style={Styles.tripDetailsContainer}>
                 <StatusBarLayout>
-                    <StatusContent icon={measureIcon} measure={distance} {...Styles.tripContent}/>
+                    <StatusContent icon={measureIcon} measure={distance} {...Styles.tripContent} />
                     <StatusContent icon={timeIcon} measure={`${time.hours}:${time.minutes}`} {...Styles.tripContent} />
-                    <StatusContent icon={stepsIcon} measure={steps} {...Styles.tripContent}/>
+                    <StatusContent icon={stepsIcon} measure={steps} {...Styles.tripContent} />
                 </StatusBarLayout>
-            </View>    
+            </View>
+            <View style={Styles.distanceContainer}>
+                <Text style={Styles.distanceContent}>{'5.00'}</Text>
+                <Text style={Styles.distanceText}>{'Mels'}</Text>
+            </View>
+            <Progress {...{ marginTop: 60 }} progress={progress} />
+            <View style={Styles.avatarContainer}>
+                <Pressable onPress={() => { setResume(!resume)}}>
+                    <Avatar
+                        size={100}
+                        rounded
+                        containerStyle={Styles.avater}
+                    />
+                    <View style={Styles.pausIcon}>
+                        {resume ? pauseIcon : resumIcon}
+                    </View>
+                </Pressable>
+                <Pressable onLongPress={()=>{console.log('finsh')}}>
+                    <Avatar
+                        size={100}
+                        rounded
+                        containerStyle={Styles.avater}
+                    />
+                    <View style={Styles.pausIcon}>
+                        {finshIcon}
+                    </View>
+                </Pressable> 
+            </View>
         </View>
     )
 };
