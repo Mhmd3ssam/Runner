@@ -71,7 +71,7 @@ const StartScreen = ({ route, navigation }) => {
                         {resume ? pauseIcon : resumIcon}
                     </View>
                 </Pressable>
-                <Pressable onLongPress={()=>{console.log('finsh')}}>
+                <Pressable onLongPress={()=>{navigation.navigate("Trips")}}>
                     <Avatar
                         size={100}
                         rounded
