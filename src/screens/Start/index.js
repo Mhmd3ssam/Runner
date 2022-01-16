@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef} from 'react';
 import { View, Text, Pressable, Alert, Vibration} from 'react-native';
 import { Avatar } from 'react-native-elements';
 
 import { Styles } from './styles'
 import { startCounter, stopCounter } from 'react-native-accurate-step-counter';
+import Geolocation from 'react-native-geolocation-service';
+import { uerPermision, calDistance } from '../../service';
+
 
 import Entypo from "react-native-vector-icons/Entypo";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -22,10 +25,11 @@ const StartScreen = ({ route, navigation }) => {
     const [progress, setProgress] = useState('20%');
     const [resume, setResume] = useState(true);
     const[tripTime, setTripTime] = useState();
-    const[tripDistance, setTripDistance] = useState();
+    const[tripDistance, setTripDistance] = useState(0);
+    const[location,setLocation] = useState(null);
+    const watchId = useRef(null )
 
-    const ONE_SECOND_IN_MS = 1000;
-
+    console.log(location)
     const timeIcon = <Ionicons name="timer-outline" size={50} style={Styles.tripIcons} />
     const measureIcon = <FontAwesome5 name="running" size={50} style={Styles.tripIcons} />
     const stepsIcon = <Entypo name="baidu" size={50} style={Styles.tripIcons} />
@@ -35,11 +39,80 @@ const StartScreen = ({ route, navigation }) => {
 
     const handleTrip = ()=>{ 
         setResume(!resume);
-        setPausStps(steps);
-        
+        setPausStps(steps);     
     }
 
- 
+    const getLocationUpdates = async () => {
+        const hasPermission = await uerPermision();
+    
+        if (!hasPermission) {
+            console.log('error')
+          return;
+        }
+        let oldLocation = null;
+        let totalDistance = 0
+        watchId.current = Geolocation.watchPosition(
+          position => {
+            setLocation(position);
+            let newDistance ;
+            if(oldLocation){
+                newDistance = 0;
+            }else{
+                
+                newDistance = calDistance(
+                    70.0326189,
+                    10.714204,
+                    position.coords.latitude,
+                    position.coords.longitude,
+                );
+               
+            }
+            console.log(totalDistance,'tootal')
+            console.log(newDistance,'new')
+            totalDistance = totalDistance + (parseFloat(newDistance)?parseFloat(newDistance):0);     
+            setTripDistance(totalDistance);
+            oldLocation = position;
+          },
+          error=> {
+            setLocation(error);
+          },
+          {
+            accuracy: {
+              android: 'high',
+            },
+            enableHighAccuracy: true,
+            distanceFilter: 0,
+            interval: 10000,
+            fastestInterval: 2000,
+            forceRequestLocation: true,
+            forceLocationManager: true,
+          },
+        );
+    };
+
+    const removeLocationUpdates = () => {
+        if (watchId.current !== null) {
+          Geolocation.clearWatch(watchId.current);
+          watchId.current = null;
+        }
+    };
+
+    useEffect(()=>{
+        let cancle;
+        navigation.addListener('focus',(event)=>{
+            cancle = getLocationUpdates()
+        }) 
+        return ()=> cancle;
+    },[navigation])
+    
+    useEffect(
+        () =>
+          navigation.addListener('blur', event => {
+            removeLocationUpdates();
+          }),
+        [navigation],
+    );
+
     useEffect(()=>{
         navigation.addListener('beforeRemove',(event)=>{
             event.preventDefault();
@@ -50,7 +123,8 @@ const StartScreen = ({ route, navigation }) => {
             ]
             )
         })
-    },[navigation])
+    },[navigation]);
+
     useEffect(() => {
         const config = {
             default_threshold: 15.0,
@@ -78,7 +152,7 @@ const StartScreen = ({ route, navigation }) => {
                 </StatusBarLayout>
             </View>
             <View style={Styles.distanceContainer}>
-                <Text style={Styles.distanceContent}>{'5.00'}</Text>
+                <Text style={Styles.distanceContent}>{tripDistance}</Text>
                 <Text style={Styles.distanceText}>{'Miles'}</Text>
             </View>
             <Progress {...{ marginTop: 60 }} progress={progress} />
@@ -113,3 +187,5 @@ const StartScreen = ({ route, navigation }) => {
 };
 
 export default StartScreen;
+
+//"latitude": 70.0326189, "longitude": 10.714204

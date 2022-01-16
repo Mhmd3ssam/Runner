@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Pressable, TextInput, PermissionsAndroid,Platform, } from 'react-native';
+import React, { useState, useEffect,useRef } from 'react';
+import { View, Text, Pressable, TextInput, PermissionsAndroid,Platform, ToastAndroid} from 'react-native';
 import MapView, { Circle } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import { Styles } from './styles';
@@ -19,9 +19,8 @@ const Home = () => {
     })
     const [toggle, setToggle] = useState(true);
     const [error, setError] = useState(null);
-    const[psoition,setposition] = useState({});
-    
-    
+    const[psoition,setPosition] = useState(null);
+   
     const inputValdation = (input, typeOFMeasure) => {
         let rgx;
         if (typeOFMeasure) {
@@ -60,11 +59,12 @@ const Home = () => {
         let hasPermission = await uerPermision();
         if(!hasPermission)return;
         Geolocation.getCurrentPosition((position)=>{
-            setposition(position) ;
+            setPosition(position) ;
             console.log(position);
         }, (error)=>{
-            console.log(error);
-            setposition(null);
+            setPosition(null);
+            ToastAndroid.show("Please turn on your location", ToastAndroid.LONG);
+            
         },{
             accuracy: {
               android: 'high',
@@ -78,12 +78,15 @@ const Home = () => {
             showLocationDialog: true,
           });
     }
+   
     useEffect(()=>{
-        uerPermision();
-        userLocation();
-        console.log(psoition.latitude,'latitude')
-        
-    },[navigation])
+        navigation.addListener('blur',()=>{
+            uerPermision();
+            userLocation();
+        });
+    },[navigation]);
+
+    
     return (
         <>
             {/* Map section */}
@@ -93,8 +96,8 @@ const Home = () => {
                     region={{
                         latitude: psoition?.coords.latitude || 31.0326272,
                         longitude: psoition?.coords.longitude ||30.7142433,
-                        latitudeDelta: psoition?.latitudeDelta ||0.0922,
-                        longitudeDelta: psoition?.longitudeDelta ||0.0421,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
                     }}
                     minZoomLevel={18}
                 >
