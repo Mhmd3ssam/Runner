@@ -26,9 +26,8 @@ export const App = () => {
 
   const MyStck = () => {
     return (
-
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={MyTaps} options={{ headerShown: false }} />
+        <Stack.Screen name="Taps" component={MyTaps} options={{ headerShown: false }} />
         <Stack.Screen name="TripDetails" component={DetailsScreen} options={{
           headerRight: () => {
             return (
