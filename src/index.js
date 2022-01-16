@@ -13,30 +13,38 @@ import DetailsScreen from './screens/Details';
 import StartScreen from './screens/Start';
 import Map from './components/Map';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { reducer } from './store/reducer';
+
+const store = createStore(reducer);
+
+
 export const App = () => {
   const Tab = createMaterialTopTabNavigator();
   const Stack = createNativeStackNavigator();
 
-  const MyStck = ()=>{
-    return(
-      <Stack.Navigator>   
-          <Stack.Screen name="Home" component={MyTaps}  options={{headerShown: false}}/>
-          <Stack.Screen name="TripDetails" component={DetailsScreen} options={{
-            headerRight:()=>{
-             return(
-            <Pressable onPress={()=>{console.log("share")}}>
-              <Fontisto name="share" size={20} style={{marginRight:15, color:"black"}}/>
-            </Pressable>
-             )
-            }
-          }} />
-          <Stack.Screen name="Start" component={StartScreen} options={{headerShown: false}} />
-          <Stack.Screen name="Map" component={Map} options={{headerShown: false}} />
+  const MyStck = () => {
+    return (
+
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={MyTaps} options={{ headerShown: false }} />
+        <Stack.Screen name="TripDetails" component={DetailsScreen} options={{
+          headerRight: () => {
+            return (
+              <Pressable onPress={() => { console.log("share") }}>
+                <Fontisto name="share" size={20} style={{ marginRight: 15, color: "black" }} />
+              </Pressable>
+            )
+          }
+        }} />
+        <Stack.Screen name="Start" component={StartScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Map" component={Map} options={{ headerShown: false }} />
       </Stack.Navigator>
     )
   }
-  const MyTaps = ()=>{
-    return(
+  const MyTaps = () => {
+    return (
       <Tab.Navigator screenOptions={{
         tabBarLabelStyle: {
           fontWeight: "bold",
@@ -44,15 +52,18 @@ export const App = () => {
         },
         tabBarStyle: { backgroundColor: COLORS.powderblue },
       }}>
-        <Tab.Screen name="Home" component={HomeScreen} options={{tabBarLabel: "Run"}}/>
+        <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: "Run" }} />
         <Tab.Screen name="Trips" component={HistoryScreen} />
       </Tab.Navigator>
     )
   }
   return (
-    <NavigationContainer>
-      <MyStck/>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <MyStck />
+      </NavigationContainer>
+    </Provider>
+
 
   );
 };
