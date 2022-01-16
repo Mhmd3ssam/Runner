@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { Styles } from './styles.js';
+
 const StatusContent = ({title,measure,icon,...props}) => {
     return (
         <View>
-            <Text style={{color: '#fe9836',alignSelf:"center",...props}}>
+            <Text style={{...Styles.mearsure,...props}}>
                 {measure}
             </Text>
-            <Text style={{alignSelf: "center"}}>
+            <Text style={Styles.text}>
                 {title || icon}
             </Text>
         </View>

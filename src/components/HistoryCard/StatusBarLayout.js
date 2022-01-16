@@ -1,14 +1,10 @@
 import React from 'react';
 import { View, } from 'react-native';
+import { Styles } from './styles.js';
 
 const StatusBarLayout = ({children}) => {
     return (
-        <View style={{
-            flexDirection:"row",
-            justifyContent:"space-between",
-            marginTop:12,
-            alignItems:"center"
-        }}>
+        <View style={Styles.layoutContainer}>
             {children}
         </View>
     )

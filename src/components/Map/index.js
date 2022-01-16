@@ -31,8 +31,7 @@ const Map = ({ route, navigation }) => {
                 }}
                     radius={4}
                     fillColor='green'
-                />
-                
+                />              
             </MapView>
         </View>
     )
