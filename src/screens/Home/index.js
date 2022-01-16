@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useRef } from 'react';
-import { View, Text, Pressable, TextInput, PermissionsAndroid,Platform, ToastAndroid} from 'react-native';
+import { View, Text, Pressable, TextInput, PermissionsAndroid,Platform, ToastAndroid, Vibration} from 'react-native';
 import MapView, { Circle } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import { Styles } from './styles';
@@ -11,7 +11,7 @@ import { uerPermision } from '../../service';
 
 const Home = () => {
     const navigation = useNavigation(); 
-    const [distance, setDistance] = useState('0.0');
+    const [distance, setDistance] = useState('0');
     const [time, setTime] = useState({
         hours: '00',
         minutes: '00'
@@ -33,6 +33,15 @@ const Home = () => {
 
     }
 
+    const handelStart= ()=>{
+        if(distance === '0' ){
+            setError('distance require to evaluate your progress');
+            Vibration.vibrate();
+
+        }else{
+            navigation.navigate("Start",{distance:distance,time:time}) 
+        }
+    }
     const inputHandelChange = (value, toggle) => {
 
         if (!inputValdation(value, toggle)[0] && toggle) {
@@ -133,7 +142,7 @@ const Home = () => {
                         title="START"
                         titleStyle={Styles.stratAvatarContent}
                         containerStyle={Styles.avaterContainer}
-                        onPress={() => { navigation.navigate("Start",{distance:distance,time:time}) }}
+                        onPress={handelStart}
                     />
                     {/* Toggle butoon to conter the trip by distance or time  */}
                     <Pressable
