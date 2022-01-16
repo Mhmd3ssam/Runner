@@ -5,7 +5,7 @@ import { Avatar } from 'react-native-elements';
 import { Styles } from './styles'
 import { startCounter, stopCounter } from 'react-native-accurate-step-counter';
 import Geolocation from 'react-native-geolocation-service';
-import { uerPermision, calDistance } from '../../service';
+import { uerPermision, calDistance, secondsToHm } from '../../service';
 
 
 import Entypo from "react-native-vector-icons/Entypo";
@@ -27,7 +27,8 @@ const StartScreen = ({ route, navigation }) => {
     const[tripTime, setTripTime] = useState();
     const[tripDistance, setTripDistance] = useState(0);
     const[location,setLocation] = useState(null);
-    const watchId = useRef(null )
+    const watchId = useRef(null );
+
 
     console.log(location)
     const timeIcon = <Ionicons name="timer-outline" size={50} style={Styles.tripIcons} />
@@ -42,6 +43,12 @@ const StartScreen = ({ route, navigation }) => {
         setPausStps(steps);     
     }
 
+    
+  
+  
+
+ 
+
     const getLocationUpdates = async () => {
         const hasPermission = await uerPermision();
     
@@ -50,27 +57,34 @@ const StartScreen = ({ route, navigation }) => {
           return;
         }
         let oldLocation = null;
-        let totalDistance = 0
+        let totalDistance = 0;
+        let totalTime = 0;
         watchId.current = Geolocation.watchPosition(
           position => {
             setLocation(position);
             let newDistance ;
+            let newTime;
             if(oldLocation){
                 newDistance = 0;
+                newTime = 0;
             }else{
                 
                 newDistance = calDistance(
-                    70.0326189,
-                    10.714204,
+                    oldLocation?.coords.latitude,
+                    oldLocation?.coords.longitude,
                     position.coords.latitude,
                     position.coords.longitude,
                 );
                
             }
-            console.log(totalDistance,'tootal')
-            console.log(newDistance,'new')
+            console.log(totalDistance,'tootal');
+            console.log(newDistance,'new');
+
+            newTime = 10;
+            totalTime = totalTime + newTime;
             totalDistance = totalDistance + (parseFloat(newDistance)?parseFloat(newDistance):0);     
-            setTripDistance(totalDistance);
+            setTripTime(secondsToHm(totalTime));
+            setTripDistance(totalDistance.toFixed(2));
             oldLocation = position;
           },
           error=> {
@@ -96,7 +110,8 @@ const StartScreen = ({ route, navigation }) => {
           watchId.current = null;
         }
     };
-
+    
+    
     useEffect(()=>{
         let cancle;
         navigation.addListener('focus',(event)=>{
@@ -146,16 +161,16 @@ const StartScreen = ({ route, navigation }) => {
         }}>
             <View style={Styles.tripDetailsContainer}>
                 <StatusBarLayout>
-                    <StatusContent icon={measureIcon} measure={distance} {...Styles.tripContent} />
-                    <StatusContent icon={timeIcon} measure={`${time.hours}:${time.minutes}`} {...Styles.tripContent} />
+                    <StatusContent icon={measureIcon} measure={tripDistance} {...Styles.tripContent} />
+                    <StatusContent icon={timeIcon} measure={tripTime?tripTime :"00:00:00"} {...Styles.tripContent} />
                     <StatusContent icon={stepsIcon} measure={resume ? steps:pausStps  } {...Styles.tripContent} />
                 </StatusBarLayout>
             </View>
             <View style={Styles.distanceContainer}>
-                <Text style={Styles.distanceContent}>{tripDistance}</Text>
-                <Text style={Styles.distanceText}>{'Miles'}</Text>
+                <Text style={Styles.distanceContent}>{+distance? distance:`${time.hours}:${time.minutes}`}</Text>
+                <Text style={Styles.distanceText}>{+distance?'Km':'H : M'}</Text>
             </View>
-            <Progress {...{ marginTop: 60 }} progress={progress} />
+            <Progress {...{ marginTop: 60,  }} progress={progress} />
             <View style={Styles.avatarContainer}>
                 <Pressable onPress={handleTrip}>
                     <Avatar

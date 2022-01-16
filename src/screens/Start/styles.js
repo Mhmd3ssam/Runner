@@ -22,7 +22,7 @@ export const Styles = StyleSheet.create({
     tripContent: {
         color: "white",
         marginBottom: 10,
-        fontSize: 35,
+        fontSize: 22,
     },
     distanceContainer:{
         alignItems: 'center',
@@ -37,7 +37,8 @@ export const Styles = StyleSheet.create({
     },
     distanceText:{
         fontSize: 30,
-        color:"white"
+        color:"white",
+        fontStyle:"italic"
     },
     avatarContainer:{
         flexDirection:"row",

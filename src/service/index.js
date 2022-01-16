@@ -64,3 +64,19 @@ export const calDistance = (lat1, lon1, lat2, lon2) => {
   return finalDistance.toFixed(2);
 };
 
+export const secondsToHm = seconds => {
+  seconds = Number(seconds);
+
+  var hours = Math.floor(seconds / 3600);
+  var minutes = Math.floor((seconds % 3600) / 60);
+  var second = Math.floor((seconds % 3600) % 60);
+
+  return (
+    ('0' + hours).slice(-2) +
+    ':' +
+    ('0' + minutes).slice(-2) +
+    ':' +
+    ('0' + second).slice(-2)
+  );
+};
+
