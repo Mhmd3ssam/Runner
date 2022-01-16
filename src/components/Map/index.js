@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { Styles } from './styles.js';
 
 const Map = ({ route, navigation }) => {
-    const { startLatitude,startLongitude,endLatitude,endLongitude } = route.params;
+    const { startLatitude, startLongitude, endLatitude, endLongitude } = route.params;
 
     return (
         <View style={Styles.mapContainer}>
@@ -25,6 +25,14 @@ const Map = ({ route, navigation }) => {
                     radius={4}
                     fillColor='red'
                 />
+                <Circle center={{
+                    latitude: 31.0326272,
+                    longitude: 30.7142433
+                }}
+                    radius={4}
+                    fillColor='green'
+                />
+                
             </MapView>
         </View>
     )
