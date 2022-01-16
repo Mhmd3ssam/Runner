@@ -17,14 +17,18 @@ import StatusContent from "../../components/HistoryCard/StatusContent";
 
 const Details = ({ route, navigation }) => {
     const { data } = route.params;
+    let coords = {
+        "startLatitude":data.startLatitude,
+        "startLongitude":data.startLongitude,
+        "endLatitude": data.endLatitude,
+        "endLongitude": data.endLongitude
+    }
     const [title, setTitle] = useState(data.Title);
     const [distanceAwayFromLevel, setDistanceAwayFromLevel] = useState(0);
     const [progress, setProgress] = useState('0%');
     const [level, setLevel] = useState('green');
     const [imageLevelSrc, setImageLevelSrc] = useState(null)
     const titleInputRef = useRef();
-    const _data = useSelector(state=>state);
-    console.log(_data);
 
     const timeIcon = <Ionicons name="timer-outline" size={25} style={Styles.tripIcons} />
     const measureIcon = <FontAwesome5 name="running" size={25} style={Styles.tripIcons} />
@@ -82,8 +86,8 @@ const Details = ({ route, navigation }) => {
                     <MapView
                         style={Styles.map}
                         region={{
-                            latitude: 37.75710,
-                            longitude: -122.4324,
+                            latitude: data.startLatitude,
+                            longitude: data.startLongitude,
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421,
                         }}
@@ -106,7 +110,7 @@ const Details = ({ route, navigation }) => {
                         {'Kilometers'}
                     </Text>
                 </View>
-                <Pressable style={Styles.tripDetailsContainer} onPress={() => { navigation.navigate("Map")}}>
+                <Pressable style={Styles.tripDetailsContainer} onPress={() => { navigation.navigate("Map",{...coords})}}>
                     <StatusBarLayout>
                         <StatusContent icon={measureIcon} measure={data.Kilometers} {...{ marginBottom: 10 }} />
                         <StatusContent icon={timeIcon} measure={data.Time} {...{ marginBottom: 10 }} />

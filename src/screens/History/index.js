@@ -7,7 +7,6 @@ import {useDispatch, useSelector} from 'react-redux';
 const History = () => {
     const renderItem = ({ item }) => <Card data={item}/>;
     const _data = useSelector(state=>state);
-    console.log(_data);
     return (
         <SafeAreaView>
             <FlatList

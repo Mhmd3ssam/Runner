@@ -50,7 +50,7 @@ const StartScreen = ({ route, navigation }) => {
     }
 
     const handleSaveTrip = ()=>{
-        let data = {
+        let trip = {
             "ID":"1",
             "Day":dayName(),
             "StartTime":tripStartedAt,
@@ -65,7 +65,7 @@ const StartScreen = ({ route, navigation }) => {
             "endLatitude": location.coords.latitude,
             "endLongitude": location.coords.longitude
         }
-        dispatch(saveTrip(data));
+        dispatch(saveTrip(trip));
         Vibration.vibrate();
         navigation.navigate("Trips");
     }

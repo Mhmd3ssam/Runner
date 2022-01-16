@@ -3,23 +3,24 @@ import MapView, { Circle } from 'react-native-maps';
 import { View } from 'react-native';
 import { Styles } from './styles.js';
 
-const Map = () => {
-  
+const Map = ({ route, navigation }) => {
+    const { startLatitude,startLongitude,endLatitude,endLongitude } = route.params;
+
     return (
         <View style={Styles.mapContainer}>
             <MapView
                 style={Styles.map}
                 region={{
-                    latitude: 37.75710,
-                    longitude: -122.4324,
+                    latitude: startLatitude,
+                    longitude: startLongitude,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
                 minZoomLevel={18}
             >
                 <Circle center={{
-                    latitude: 37.75710,
-                    longitude: -122.4324
+                    latitude: startLatitude,
+                    longitude: startLongitude
                 }}
                     radius={4}
                     fillColor='red'
