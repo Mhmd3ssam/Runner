@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TextInput, Pressable, Keyboard, Image } from 'react-native';
 import MapView, { Circle } from 'react-native-maps';
 import { Styles } from './styles.js';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Feather from "react-native-vector-icons/Feather";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -22,6 +23,8 @@ const Details = ({ route, navigation }) => {
     const [level, setLevel] = useState('green');
     const [imageLevelSrc, setImageLevelSrc] = useState(null)
     const titleInputRef = useRef();
+    const _data = useSelector(state=>state);
+    console.log(_data);
 
     const timeIcon = <Ionicons name="timer-outline" size={25} style={Styles.tripIcons} />
     const measureIcon = <FontAwesome5 name="running" size={25} style={Styles.tripIcons} />

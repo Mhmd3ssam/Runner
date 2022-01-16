@@ -5,8 +5,10 @@ import { Avatar } from 'react-native-elements';
 import { Styles } from './styles'
 import { startCounter, stopCounter } from 'react-native-accurate-step-counter';
 import Geolocation from 'react-native-geolocation-service';
-import { uerPermision, calDistance, secondsToHm } from '../../service';
+import { uerPermision, calDistance, secondsToHm, dayName, timeOfDay, getTime } from '../../service';
 
+import {useDispatch, useSelector} from 'react-redux';
+import {saveTrip} from '../../store/actions';
 
 import Entypo from "react-native-vector-icons/Entypo";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -25,12 +27,16 @@ const StartScreen = ({ route, navigation }) => {
     const [progress, setProgress] = useState('20%');
     const [resume, setResume] = useState(true);
     const[tripTime, setTripTime] = useState();
+    const[tripStartedAt, setTripStartedAt] = useState();
     const[tripDistance, setTripDistance] = useState(0);
+    const[latitude,setLatitude] = useState();
+    const[longitude,setLongitude] = useState();
     const[location,setLocation] = useState(null);
     const watchId = useRef(null );
 
-
-    console.log(location)
+    const dispatch = useDispatch();
+    const data = useSelector(state=>state);
+    
     const timeIcon = <Ionicons name="timer-outline" size={50} style={Styles.tripIcons} />
     const measureIcon = <FontAwesome5 name="running" size={50} style={Styles.tripIcons} />
     const stepsIcon = <Entypo name="baidu" size={50} style={Styles.tripIcons} />
@@ -43,12 +49,27 @@ const StartScreen = ({ route, navigation }) => {
         setPausStps(steps);     
     }
 
+    const handleSaveTrip = ()=>{
+        let data = {
+            "ID":"1",
+            "Day":dayName(),
+            "StartTime":tripStartedAt,
+            "Title":`${dayName()} ${timeOfDay()} Run`,
+            "MapImage":"https://images.unsplash.com/photo-1584972191378-d70853fc47fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+            "Kilometers":tripDistance,
+            "Time":tripTime,
+            "Steps":steps,
+            "totalKmRun": "19",
+            "startLatitude":latitude,
+            "startLongitude":longitude,
+            "endLatitude": location.coords.latitude,
+            "endLongitude": location.coords.longitude
+        }
+        dispatch(saveTrip(data));
+        Vibration.vibrate();
+        navigation.navigate("Trips");
+    }
     
-  
-  
-
- 
-
     const getLocationUpdates = async () => {
         const hasPermission = await uerPermision();
     
@@ -111,7 +132,14 @@ const StartScreen = ({ route, navigation }) => {
         }
     };
     
-    
+    useEffect(()=>{
+        if(location && tripTime === '00:00:10'){
+            setTripStartedAt(getTime(location.timestamp));
+            setLatitude(location.coords.latitude);
+            setLongitude(location.coords.longitude);
+        }
+    },[tripTime]);
+
     useEffect(()=>{
         let cancle;
         navigation.addListener('focus',(event)=>{
@@ -182,11 +210,7 @@ const StartScreen = ({ route, navigation }) => {
                         {resume ? pauseIcon : resumIcon}
                     </View>
                 </Pressable>
-                <Pressable onLongPress={()=>{
-                    Vibration.vibrate()
-                    navigation.navigate("Trips")
-                    
-                }}>
+                <Pressable onLongPress={handleSaveTrip}>
                     <Avatar
                         size={100}
                         rounded

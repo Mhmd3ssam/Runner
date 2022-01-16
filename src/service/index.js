@@ -1,46 +1,46 @@
-import { PermissionsAndroid,Platform, } from 'react-native';
+import { PermissionsAndroid, Platform, } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 
 
-export const uerPermision = async ()=>{
-    if (Platform.OS === 'ios') {
-        const hasPermission = await hasPermissionIOS();
-        return hasPermission;
-      }
-  
-      if (Platform.OS === 'android' && Platform.Version < 23) {
-        return true;
-      }
-  
-      const hasPermission = await PermissionsAndroid.check(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      );
-  
-      if (hasPermission) {
-        return true;
-      }
-  
-      const status = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      );
-  
-      if (status === PermissionsAndroid.RESULTS.GRANTED) {
-        return true;
-      }
-  
-      if (status === PermissionsAndroid.RESULTS.DENIED) {
-        ToastAndroid.show(
-          'Location permission denied by user.',
-          ToastAndroid.LONG,
-        );
-      } else if (status === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
-        ToastAndroid.show(
-          'Location permission revoked by user.',
-          ToastAndroid.LONG,
-        );
-      }
-  
-      return false;
+export const uerPermision = async () => {
+  if (Platform.OS === 'ios') {
+    const hasPermission = await hasPermissionIOS();
+    return hasPermission;
+  }
+
+  if (Platform.OS === 'android' && Platform.Version < 23) {
+    return true;
+  }
+
+  const hasPermission = await PermissionsAndroid.check(
+    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+  );
+
+  if (hasPermission) {
+    return true;
+  }
+
+  const status = await PermissionsAndroid.request(
+    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+  );
+
+  if (status === PermissionsAndroid.RESULTS.GRANTED) {
+    return true;
+  }
+
+  if (status === PermissionsAndroid.RESULTS.DENIED) {
+    ToastAndroid.show(
+      'Location permission denied by user.',
+      ToastAndroid.LONG,
+    );
+  } else if (status === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
+    ToastAndroid.show(
+      'Location permission revoked by user.',
+      ToastAndroid.LONG,
+    );
+  }
+
+  return false;
 }
 
 export const calDistance = (lat1, lon1, lat2, lon2) => {
@@ -80,3 +80,35 @@ export const secondsToHm = seconds => {
   );
 };
 
+export const dayName = () => {
+  let days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  return days[new Date().getDay()];
+};
+
+export const timeOfDay = () => {
+  let currentHour = new Date().getHours();
+
+  if (currentHour < 12) {
+    return 'Morning';
+  } else if (currentHour < 18) {
+    return 'Afternoon';
+  } else {
+    return 'Evening';
+  }
+};
+
+export const getTime = (time) => {
+  let date = new Date(time * 1000);
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let formattedTime =` ${hours} : ${minutes}` ;
+  return formattedTime;
+}
