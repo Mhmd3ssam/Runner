@@ -85,7 +85,7 @@ const StartScreen = ({ route, navigation }) => {
             setLocation(position);
             let newDistance ;
             let newTime;
-            if(oldLocation){
+            if(!oldLocation){
                 newDistance = 0;
                 newTime = 0;
             }else{
@@ -96,6 +96,7 @@ const StartScreen = ({ route, navigation }) => {
                     position.coords.latitude,
                     position.coords.longitude,
                 );
+                console.log(newDistance,'calc')
                
             }
             console.log(totalDistance,'tootal');

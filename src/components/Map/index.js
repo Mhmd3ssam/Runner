@@ -26,8 +26,8 @@ const Map = ({ route, navigation }) => {
                     fillColor='red'
                 />
                 <Circle center={{
-                    latitude: 31.0326272,
-                    longitude: 30.7142433
+                    latitude: endLatitude,
+                    longitude: endLongitude
                 }}
                     radius={4}
                     fillColor='green'
