@@ -6,17 +6,17 @@ This is a brief description of the Runner project.
 
 To install the project, follow these steps:
 
-1. Step 1
-2. Step 2
-3. Step 3
+1. Clone the repository to your local machine.
+2. Install the necessary dependencies by running `npm install`.
+3. Build the project by running `npm run build`.
 
 ## Usage
 
 Here are some examples of how to use the project:
 
-- Example 1
-- Example 2
-- Example 3
+- To start the project, run `npm start`.
+- To run tests, use the command `npm test`.
+- To build the project for production, use the command `npm run build`.
 
 ## Contributing
 
